@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Гілки форуму</h2>
+{% if user.is_staff %}
+  <a href="{% url 'forum:create_thread' %}">➕ Створити гілку</a>
+{% endif %}
+<ul>
+{% for thread in threads %}
+  <li><a href="{% url 'forum:thread_detail' slug=thread.slug %}">{{ thread.title }}</a>
+      — {{ thread.posts.count }} повідомлень</li>
+{% empty %}
+  <li>Немає гілок.</li>
+{% endfor %}
+</ul>
+{% endblock %}

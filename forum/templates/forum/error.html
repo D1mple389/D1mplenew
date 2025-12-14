@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Помилка</h2>
+  <p>{{ message }}</p>
+  <p><a href="{% url 'forum:thread_list' %}">Повернутися до списку гілок</a></p>
+{% endblock %}

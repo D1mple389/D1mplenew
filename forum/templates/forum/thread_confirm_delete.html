@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Видалити гілку "{{ thread.title }}"?</h2>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Так, видалити</button>
+</form>
+{% endblock %}

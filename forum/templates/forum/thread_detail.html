@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ thread.title }}</h2>
+<p>{{ thread.description }}</p>
+
+<h3>Повідомлення:</h3>
+{% for post in thread.posts.all %}
+  <div>
+    <strong>{{ post.author }}</strong> — {{ post.created_at }}
+    <p>{{ post.content }}</p>
+  </div>
+{% empty %}
+  <p>Ще немає повідомлень.</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+  <hr>
+  <form method="post" action="{% url 'forum:create_post' thread.slug %}">
+    {% csrf_token %}
+    {{ post_form.as_p }}
+    <button type="submit">Відправити</button>
+  </form>
+{% else %}
+  <p><a href="/admin/login/">Увійдіть</a>, щоб писати повідомлення.</p>
+{% endif %}
+{% endblock %}
